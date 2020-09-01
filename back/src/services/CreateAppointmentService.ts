@@ -16,8 +16,8 @@ interface Request {
 }
 
 /**
- * SOLID:
- * Dependency Inversion
+ * SOLID
+ *
  * S-Single Responsibility Principle
  * D-Dependency Inversion
  */
