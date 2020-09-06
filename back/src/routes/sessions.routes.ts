@@ -8,22 +8,18 @@ const sessionsRouter = Router();
 
 // POST http://localhost:3333/sessions
 sessionsRouter.post('/', async (request, response) => {
-  try {
-    const { email, password } = request.body;
+  const { email, password } = request.body;
 
-    const authenticationUser = new AuthenticatedUserService();
+  const authenticationUser = new AuthenticatedUserService();
 
-    const { user, token } = await authenticationUser.execute({
-      email,
-      password,
-    });
+  const { user, token } = await authenticationUser.execute({
+    email,
+    password,
+  });
 
-    delete user.password;
+  delete user.password;
 
-    return response.json({ user, token });
-  } catch (err) {
-    return response.status(err.statusCode).json({ error: err.message });
-  }
+  return response.json({ user, token });
 });
 
 export default sessionsRouter;

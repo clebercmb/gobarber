@@ -24,7 +24,7 @@ export default class AlterProviderFieldToProviderId1599046655986
         columnNames: ['provider_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
-        onDelete: 'SET NULL',
+        onDelete: 'SET NULL', // In case of deleting Provider, Appointment will be set to NULL
         onUpdate: 'CASCADE',
       }),
     );
