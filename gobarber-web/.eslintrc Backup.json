@@ -27,7 +27,6 @@
     "prettier/prettier": "error",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
@@ -45,9 +44,7 @@
         "ts": "never",
         "tsx": "never"
       }
-    ],
-    "no-use-before-define": [0],
-    "@typescript-eslint/no-use-before-define": [1]
+    ]
   },
   "settings": {
     "import/resolver": {

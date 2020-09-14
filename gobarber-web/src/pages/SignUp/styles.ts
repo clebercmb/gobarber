@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-import signInBackgroundImg from '../../assets/sign-in-background.png';
+import signInBackgroundImg from '../../assets/sign-up-background.png';
 
 export const Container = styled.div`
   height: 100vh;
@@ -26,43 +26,6 @@ export const Content = styled.div`
       margin-bottom: 24px;
     }
 
-    input {
-      border-radius: 10px;
-      border: 2px solid #232129;
-      background: #232129;
-      padding: 16px;
-      width: 100%;
-      color: #f4ede8;
-
-      &::placeholder {
-        color: #666360;
-      }
-      /*-webkit-text-fill-color: #fff;
-      transition: background-color 5000s ease-in-out 0s;*/
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
-    button {
-      border-radius: 10px;
-      height: 56px;
-      border: 0;
-      background: #ff9000;
-      padding: 0 16px;
-      color: #312e38;
-      width: 100%;
-      font-weight: 500;
-      margin-top: 16px;
-      transition: background-color 0.2s;
-      /*-webkit-text-fill-color: #fff;
-      transition: background-color 5000s ease-in-out 0s;*/
-      &:hover {
-        background: ${shade(0.2, '#ff9000')};
-      }
-    }
-
     a {
       color: #f4ede8;
       display: block;
@@ -77,7 +40,7 @@ export const Content = styled.div`
   }
 
   > a {
-    color: #ff9000;
+    color: #f4ede8;
     display: block;
     margin-top: 24px;
     text-decoration: none;
@@ -91,7 +54,7 @@ export const Content = styled.div`
     }
 
     &:hover {
-      color: ${shade(0.2, '#ff9000')};
+      color: ${shade(0.2, '#F4EDE8')};
     }
   }
 `;
