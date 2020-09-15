@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
+import * as Yup from 'yup';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -8,34 +12,68 @@ import Button from '../../components/Button';
 
 import { Container, Content, Background } from './styles';
 
-const SignUp: React.FC = () => (
-  <Container>
-    <Background />
-    <Content>
-      <img src={logoImg} alt="GoBarber" />
-      <form>
-        <h1>To register</h1>
-        <Input type="text" icon={FiUser} name="name" placeholder="Name" />
+const SignUp: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
 
-        <Input type="text" icon={FiMail} name="email" placeholder="E-mail" />
+  console.log(formRef);
 
-        <Input
-          type="password"
-          icon={FiLock}
-          name="password"
-          placeholder="Password"
-        />
+  const handleSubmit = useCallback(async (data: Record<string, unknown>) => {
+    console.log(data);
+    try {
+      formRef.current?.setErrors({});
 
-        <Button type="submit">Register</Button>
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        email: Yup.string()
+          .required('Email is required')
+          .email('Type a valid e-mail'),
+        password: Yup.string().min(6, 'Minimal of 6 digits password required'),
+      });
 
-        <a href="forgot">Forgot my password</a>
-      </form>
-      <a href="login">
-        <FiArrowLeft />
-        Back to Logon
-      </a>
-    </Content>
-  </Container>
-);
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      console.log(err);
+
+      const errors = getValidationErrors(err);
+
+      formRef.current?.setErrors(errors);
+    }
+  }, []);
+
+  return (
+    <Container>
+      <Background />
+
+      <Content>
+        <img src={logoImg} alt="GoBarber" />
+
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <h1>To register</h1>
+
+          <Input type="text" icon={FiUser} name="name" placeholder="Name" />
+
+          <Input type="text" icon={FiMail} name="email" placeholder="E-mail" />
+
+          <Input
+            type="password"
+            icon={FiLock}
+            name="password"
+            placeholder="Password"
+          />
+
+          <Button type="submit">Register</Button>
+
+          <a href="forgot">Forgot my password</a>
+        </Form>
+        <a href="login">
+          <FiArrowLeft />
+          Back to Logon
+        </a>
+      </Content>
+    </Container>
+  );
+};
 
 export default SignUp;
