@@ -18,6 +18,10 @@ const ToastContainer: React.FC<ToastContainerProps> = ({ messages }) => {
       from: { right: '-120%', opacity: 0 },
       enter: { right: '0%', opacity: 1 },
       leave: { right: '-120%', opacity: 0 },
+      /*
+      from: { right: '-120%', opacity: 0, transform: 'rotateZ(0deg)' },
+      enter: { right: '0%', opacity: 1, transform: 'rotateZ(360deg)' },
+      leave: { right: '-120%', opacity: 0, transform: 'rotateZ(0deg)' }, */
     },
   );
 
