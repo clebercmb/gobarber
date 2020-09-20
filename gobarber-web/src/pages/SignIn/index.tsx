@@ -4,7 +4,8 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -24,10 +25,10 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
-      console.log(data);
       try {
         formRef.current?.setErrors({});
 
@@ -41,12 +42,11 @@ const SignIn: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
-        console.log('Before');
-        signIn({
+
+        await signIn({
           email: data.email,
           password: data.password,
         });
-        console.log('After');
       } catch (err) {
         console.log(err);
 
@@ -55,10 +55,16 @@ const SignIn: React.FC = () => {
           formRef.current?.setErrors(errors);
         }
 
-        //iit triggers a toast
+        // it triggers a toast
+        addToast({
+          type: 'error',
+          title: 'Authentication Error',
+          description:
+            'It happened an error to sign into your account, check your credentials',
+        });
       }
     },
-    [signIn],
+    [addToast, signIn],
   );
 
   return (
