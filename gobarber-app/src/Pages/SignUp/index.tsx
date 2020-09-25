@@ -5,7 +5,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
@@ -22,10 +21,6 @@ import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
-
-  const emailInputRef = useRef<TextInput>(null);
-  const passwordInputRef = useRef<TextInput>(null);
-
   return (
     <>
       <KeyboardAvoidingView
@@ -50,43 +45,11 @@ const SignUp: React.FC = () => {
                 console.log('data=', data);
               }}
             >
-              <Input
-                autoCapitalize="words"
-                name="name"
-                icon="user"
-                placeholder="Name"
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                  // eslint-disable-next-line no-unused-expressions
-                  emailInputRef.current?.focus();
-                }}
-              />
+              <Input name="name" icon="user" placeholder="Name" />
 
-              <Input
-                ref={emailInputRef}
-                keyboardType="email-address"
-                autoCorrect={false}
-                autoCapitalize="none"
-                name="email"
-                icon="mail"
-                placeholder="E-mail"
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                  // eslint-disable-next-line no-unused-expressions
-                  passwordInputRef.current?.focus();
-                }}
-              />
+              <Input name="email" icon="mail" placeholder="E-mail" />
 
-              <Input
-                ref={passwordInputRef}
-                secureTextEntry
-                name="password"
-                icon="lock"
-                placeholder="Password"
-                textContentType="newPassword"
-                returnKeyType="send"
-                onSubmitEditing={() => formRef.current?.submitForm()}
-              />
+              <Input name="password" icon="lock" placeholder="Password" />
 
               <Button onPress={() => formRef.current?.submitForm()}>
                 Enter
