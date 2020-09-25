@@ -1,91 +1,31 @@
-import React, { useCallback, useRef } from 'react';
-import {
-  Image,
-  View,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
-import { Form } from '@unform/mobile';
-import { FormHandles } from '@unform/core';
+import React from 'react';
+import { Image } from 'react-native';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import logoImg from '../../assets/logo.png';
 
-import {
-  Container,
-  Title,
-  ForgotPassword,
-  ForgotPasswordText,
-  CreateAccountButton,
-  CreateAccountButtonText,
-} from './styles';
+import { Container, Title } from './styles';
 
 const SignIn: React.FC = () => {
-  const formRef = useRef<FormHandles>(null);
-  const navigation = useNavigation();
-
-  const handleSignIn = useCallback((data: object) => {
-    console.log(data);
-  }, []);
-
   return (
-    <>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        enabled
-      >
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{ flex: 1 }}
-        >
-          <Container>
-            <Image source={logoImg} />
+    <Container>
+      <Image source={logoImg} />
 
-            <View>
-              <Title>Sign-In</Title>
-            </View>
+      <Title>Sign-In</Title>
 
-            <Form ref={formRef} onSubmit={handleSignIn}>
-              <Input name="email" icon="mail" placeholder="E-mail" />
+      <Input />
+      <Input />
 
-              <Input name="password" icon="lock" placeholder="Password" />
-
-              <Button
-                onPress={() => {
-                  // eslint-disable-next-line no-unused-expressions
-                  formRef.current?.submitForm();
-                }}
-              >
-                Enter
-              </Button>
-            </Form>
-
-            <ForgotPassword
-              onPress={() => {
-                console.log('Button Clicked');
-              }}
-            >
-              <ForgotPasswordText>Forgot my password</ForgotPasswordText>
-            </ForgotPassword>
-          </Container>
-        </ScrollView>
-      </KeyboardAvoidingView>
-
-      <CreateAccountButton
+      <Button
         onPress={() => {
-          navigation.navigate('SignUp');
+          console.log('>>>>Hi');
         }}
       >
-        <Icon name="log-in" size={20} color="#FF9000" />
-        <CreateAccountButtonText>Create an account</CreateAccountButtonText>
-      </CreateAccountButton>
-    </>
+        Enter
+      </Button>
+    </Container>
   );
 };
 
