@@ -14,7 +14,7 @@
     "SharedArrayBuffer": "readonly",
     "__DEV__": "readonly"
   },
-  "parser": "@typescript-eslint/parser",
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
