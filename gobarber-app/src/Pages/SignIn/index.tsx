@@ -63,15 +63,18 @@ const SignIn: React.FC = () => {
                 icon="mail"
                 placeholder="E-mail"
                 returnKeyType="next"
-                onSubmitEditing={() => passwordInputRef.current?.focus()}
+                onSubmitEditing={() => {
+                  // eslint-disable-next-line no-unused-expressions
+                  passwordInputRef.current?.focus();
+                }}
               />
 
               <Input
                 ref={passwordInputRef}
-                secureTextEntry
                 name="password"
                 icon="lock"
                 placeholder="Password"
+                secureTextEntry
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
