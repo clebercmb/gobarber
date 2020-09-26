@@ -1,5 +1,11 @@
 import React from 'react';
-import { Image } from 'react-native';
+import {
+  Image,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Input from '../../components/Input';
@@ -19,31 +25,42 @@ import {
 const SignIn: React.FC = () => {
   return (
     <>
-      <Container>
-        <Image source={logoImg} />
-
-        <Title>Sign-In</Title>
-
-        <Input name="email" icon="mail" placeholder="E-mail" />
-        <Input name="password" icon="lock" placeholder="Password" />
-
-        <Button
-          onPress={() => {
-            console.log('>>>>Hi');
-          }}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        enabled
+      >
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ flex: 1 }}
         >
-          Enter
-        </Button>
+          <Container>
+            <Image source={logoImg} />
 
-        <ForgotPassword
-          onPress={() => {
-            console.log('Sign Button');
-          }}
-        >
-          <ForgotPasswordText>Forgot my password</ForgotPasswordText>
-        </ForgotPassword>
-      </Container>
+            <View>
+              <Title>Sign-In</Title>
+            </View>
+            <Input name="email" icon="mail" placeholder="E-mail" />
+            <Input name="password" icon="lock" placeholder="Password" />
 
+            <Button
+              onPress={() => {
+                console.log('>>>>Hi');
+              }}
+            >
+              Enter
+            </Button>
+
+            <ForgotPassword
+              onPress={() => {
+                console.log('Sign Button');
+              }}
+            >
+              <ForgotPasswordText>Forgot my password</ForgotPasswordText>
+            </ForgotPassword>
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <CreateAccountButton onPress={() => {}}>
         <Icon name="log-in" size={20} color="#ff9000" />
         <CreateAccountButtonText>Create an account</CreateAccountButtonText>
