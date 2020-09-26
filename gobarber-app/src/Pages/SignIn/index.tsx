@@ -50,6 +50,7 @@ const SignIn: React.FC = () => {
 
             <Form onSubmit={handleSignIn}>
               <Input name="email" icon="mail" placeholder="E-mail" />
+
               <Input name="password" icon="lock" placeholder="Password" />
 
               <Button
@@ -60,6 +61,7 @@ const SignIn: React.FC = () => {
                 Enter
               </Button>
             </Form>
+
             <ForgotPassword
               onPress={() => {
                 console.log('Sign Button');
