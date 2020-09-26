@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,7 +10,7 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 20px;
+  font-size: 24px;
   color: #f4ede8;
   font-family: 'RobotoSlab-Medium';
   margin: 64px 0 24px;
@@ -26,7 +26,6 @@ export const BackToSignIn = styled.TouchableOpacity`
   border-color: #232129;
   padding: 16px 0 ${16 + getBottomSpace()}px;
 
-  /*display: flex;  is automatically */
   justify-content: center;
   align-items: center;
   flex-direction: row;
