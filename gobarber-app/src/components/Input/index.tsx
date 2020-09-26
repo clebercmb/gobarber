@@ -7,6 +7,7 @@ import React, {
   forwardRef,
 } from 'react';
 import { TextInputProps } from 'react-native';
+
 import { useField } from '@unform/core';
 
 import { Container, TextInput, Icon } from './styles';
@@ -69,7 +70,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
   }, [fieldName, registerField]);
 
   return (
-    <Container isFocused={isFocused}>
+    <Container isFocused={isFocused} isErrored={!!error}>
       <Icon
         name={icon}
         size={20}
