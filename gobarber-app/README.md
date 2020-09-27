@@ -3,7 +3,3 @@
 # android
 
 adb reverse tcp:3333 tcp:3333
-
-# mac
-
-adb reverse tcp:3000 tcp:3000
