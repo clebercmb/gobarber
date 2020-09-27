@@ -18,6 +18,7 @@ import * as Yup from 'yup';
 import logoImg from '../../assets/logo.png';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
@@ -34,42 +35,50 @@ const SignUp: React.FC = () => {
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
-  const handleSignUp = useCallback(async (data: SignUpFormData) => {
-    console.log(data);
-    try {
-      formRef.current?.setErrors({});
+  const handleSignUp = useCallback(
+    async (data: SignUpFormData) => {
+      console.log(data);
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Name required'),
-        email: Yup.string()
-          .required('E-mail required')
-          .email('Type a valid e-mail'),
-        password: Yup.string().min(6, 'Minimal 6 digits'),
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Name required'),
+          email: Yup.string()
+            .required('E-mail required')
+            .email('Type a valid e-mail'),
+          password: Yup.string().min(6, 'Minimal 6 digits'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      // await api.post('/users', data);
+        await api.post('/users', data);
 
-      // history.push('/');
-    } catch (err) {
-      console.log(err);
+        Alert.alert(
+          'Register succeed',
+          'You already can sign into the GoBarber',
+        );
 
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
-        return;
+        navigation.goBack();
+      } catch (err) {
+        console.log(err);
+
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        // it triggers a toast
+        Alert.alert(
+          'Register Error',
+          'It happened an error to register, try again',
+        );
       }
-
-      // it triggers a toast
-      Alert.alert(
-        'Register Error',
-        'It happened an error to register, try again',
-      );
-    }
-  }, []);
+    },
+    [navigation],
+  );
 
   return (
     <>
