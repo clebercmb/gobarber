@@ -48,7 +48,21 @@
       }
     ],
     "no-use-before-define": [0],
-    "@typescript-eslint/no-use-before-define": [1]
+    "@typescript-eslint/no-use-before-define": [1],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^react/",
+          "module",
+          "/^~/",
+          "/^@shared/",
+          ["parent", "sibling", "index"]
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
