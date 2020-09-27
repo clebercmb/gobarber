@@ -1,5 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Appointment from '../models/Appointment';
+
+import Appointment from '../entities/Appointment';
 
 interface CreateAppointmentDTO {
   provider: string;

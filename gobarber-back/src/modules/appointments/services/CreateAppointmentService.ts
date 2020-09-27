@@ -6,9 +6,9 @@
 // This service will be responsible only for the schedule of an appointment
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
-import Appointment from '../models/Appointment';
+import Appointment from '../entities/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
-import AppError from '../errors/AppError';
+import AppError from '../../../shared/errors/AppError';
 
 // The  service will always have a unique method inside of it
 // It will never have more than one method
