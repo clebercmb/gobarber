@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import User from '../../users/entities/User';
+import User from '../../../../users/infra/typeorm/entities/User';
 
 /**
  * Decorator works like a function. It will get the "Entity" function and
