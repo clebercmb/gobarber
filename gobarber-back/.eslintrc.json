@@ -16,6 +16,27 @@
   },
   "plugins": ["@typescript-eslint", "prettier", "import-helpers"],
   "rules": {
+    "no-underscore-dangle": "off",
+    "prettier/prettier": "error",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -23,15 +44,6 @@
         "ts": "never"
       }
     ],
-    "class-methods-use-this": "off",
-    "camelcase": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "_"
-      }
-    ],
-    "prettier/prettier": "error",
     "import-helpers/order-imports": [
       "warn",
       {
