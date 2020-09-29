@@ -5,7 +5,7 @@ import { container } from 'tsyringe';
 const sessionsRouter = Router();
 
 // SoC: Separation of Concerns
-// Rota: It must concerns only in receives the request, calls another file and return a response
+// Route: It must concerns only in receiving the request, calls another file and return a response
 
 // POST http://localhost:3333/sessions
 sessionsRouter.post('/', async (request, response) => {

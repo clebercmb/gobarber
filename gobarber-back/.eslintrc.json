@@ -54,6 +54,7 @@
           "module",
           "/^~/",
           "/^@shared/",
+          "/^@module/",
           ["parent", "sibling", "index"]
         ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
