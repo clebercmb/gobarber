@@ -1,9 +1,11 @@
-import uploadConfig from '@config/upload';
-import CreateUserService from '@modules/users/services/CreateUserService';
-import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 import { Router } from 'express';
 import multer from 'multer';
 import { container } from 'tsyringe';
+
+import uploadConfig from '@config/upload';
+
+import CreateUserService from '@modules/users/services/CreateUserService';
+import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 

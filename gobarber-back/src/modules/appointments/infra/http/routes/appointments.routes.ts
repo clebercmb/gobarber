@@ -1,8 +1,9 @@
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
-import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import { parseISO } from 'date-fns';
 import { Router } from 'express';
 import { container } from 'tsyringe';
+
+import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 const appointmentsRouter = Router();
 
