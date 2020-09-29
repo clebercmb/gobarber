@@ -7,7 +7,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import User from './User';
+
+import User from '@modules/users/infra/typeorm/entities/User';
 
 /**
  * Decorator works like a function. It will get the "Entity" function and

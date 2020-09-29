@@ -1,19 +1,28 @@
-import { getRepository } from 'typeorm';
-import path from 'path';
 import fs from 'fs';
-import uploadConfig from '../config/upload';
-import User from '../models/User';
-import AppError from '../errors/AppError';
+import path from 'path';
+import { injectable, inject } from 'tsyringe';
 
-interface Request {
+import uploadConfig from '@config/upload';
+
+import AppError from '@shared/errors/AppError';
+
+import User from '../infra/typeorm/entities/User';
+import IUsersRepository from '../repositories/IUsersRepository';
+
+interface IRequest {
   user_id: string;
   avatarFileName: string;
 }
-class UpdateUserAvatarService {
-  public async execute({ user_id, avatarFileName }: Request): Promise<User> {
-    const userRepository = getRepository(User);
 
-    const user = await userRepository.findOne(user_id);
+@injectable()
+class UpdateUserAvatarService {
+  constructor(
+    @inject('UsersRepository')
+    private userRepository: IUsersRepository,
+  ) {}
+
+  public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
+    const user = await this.userRepository.findById(user_id);
 
     if (!user) {
       throw new AppError('Only authenticated users can change avatar', 401);
@@ -31,7 +40,7 @@ class UpdateUserAvatarService {
 
     user.avatar = avatarFileName;
 
-    await userRepository.save(user);
+    await this.userRepository.save(user);
 
     return user;
   }
