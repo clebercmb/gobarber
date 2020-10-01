@@ -33,16 +33,7 @@ class UpdateUserAvatarService {
     }
 
     if (user.avatar) {
-      // Delete former avatar
-      const useAvatarFilePath = path.join(
-        uploadConfig.uploadsFolder,
-        user.avatar,
-      );
-      const userAvatarFileExists = await fs.promises.stat(useAvatarFilePath);
-
-      if (userAvatarFileExists) {
-        await this.storageProvider.deleteFile(user.avatar);
-      }
+      await this.storageProvider.deleteFile(user.avatar);
     }
 
     const filename = await this.storageProvider.saveFile(avatarFileName);
