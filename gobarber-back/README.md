@@ -38,7 +38,8 @@
 - Provider must be able to see non read notifications;
 
 **Non Function Requirements**
--- Provider appointments must be storage in cache;
+
+- Provider appointments must be storage in cache;
 
 **Business Rules**
 
@@ -71,4 +72,4 @@
 
 **In order to create/update the database tables execute the following command**
 
-yarn typeorm migration:run
+- yarn typeorm migration:run
