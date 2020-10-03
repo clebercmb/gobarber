@@ -80,7 +80,9 @@
 1. Routes and Controllers
 1. Tokens Repository (TypeORM)
 1. Create tokens migrations
-  1. yarn typeorm migration:create -n CreateUserTokens
+
+- yarn typeorm migration:create -n CreateUserTokens
+
 1. E-mail send provider (DEV)
 1. Register provides into the container
 1. Test everything
