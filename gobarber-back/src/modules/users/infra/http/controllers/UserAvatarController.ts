@@ -1,3 +1,6 @@
+// Controllers must have at most 5 methods: index, show, create, update and delete
+// Controllers are responsible to receive requests, forward those request to other files and give back the response
+
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
