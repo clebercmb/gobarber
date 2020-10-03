@@ -1,5 +1,7 @@
 import { v4 } from 'uuid';
 
+import AppError from '@shared/errors/AppError';
+
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
@@ -28,6 +30,10 @@ class FakeUsersRepository implements IUsersRepository {
 
   public async save(user: User): Promise<User> {
     const findIndex = this.users.findIndex(findUser => findUser.id === user.id);
+
+    if (findIndex < 0) {
+      throw new AppError('User does not exist');
+    }
 
     this.users[findIndex] = user;
 
