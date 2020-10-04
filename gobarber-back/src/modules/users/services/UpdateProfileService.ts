@@ -6,7 +6,6 @@ import IHashProvider from '@modules/users/providers/HashProvider/models/IHashPro
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
 import User from '../infra/typeorm/entities/User';
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 
 interface IRequest {
   user_id: string;
