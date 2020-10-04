@@ -4,7 +4,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import AuthenticatedUserService from '@modules/users/services/AuthenticatedUserService';
+import AuthenticatedUserService from '@modules/users/services/AuthenticateUserService';
 
 // If it has more de those 5 methods, you should create another new controller
 
