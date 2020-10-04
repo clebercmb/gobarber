@@ -16,6 +16,11 @@ const upload = multer(uploadConfig);
 // Rota: It must concerns only in receives the request, calls another file and return a response
 
 // POST http://localhost:3333/appointments
+// SoC: Separation of Concerns
+// Route: It must concerns only in receiving the request, calls another file and return a response
+
+// POST http://localhost:3333/sessions
+
 usersRouter.post('/', usersController.create);
 
 usersRouter.patch(

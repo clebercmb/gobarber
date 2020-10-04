@@ -1,3 +1,4 @@
+<!-- prettier-ignore -->
 # Recovering Password
 
 **Functional Requirements**
@@ -38,7 +39,8 @@
 - Provider must be able to see non read notifications;
 
 **Non Function Requirements**
--- Provider appointments must be storage in cache;
+
+- Provider appointments must be storage in cache;
 
 **Business Rules**
 
@@ -71,4 +73,15 @@
 
 **In order to create/update the database tables execute the following command**
 
-yarn typeorm migration:run
+- yarn typeorm migration:run
+
+# Tasks Order - Password Forgot/Reset
+
+1. TDD
+1. Routes and Controllers
+1. Tokens Repository (TypeORM)
+1. Create tokens migrations
+   1. yarn typeorm migration:create -n CreateUserTokens
+1. E-mail send provider (DEV)
+1. Register provides into the container
+1. Test everything

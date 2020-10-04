@@ -44,6 +44,7 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 export default class CreateAppointments1598961159570
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
     await queryRunner.createTable(
       new Table({
         name: 'appointments',
@@ -80,5 +81,6 @@ export default class CreateAppointments1598961159570
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('appointments');
+    await queryRunner.query(`DROP EXTENSION IF EXISTS "uuid-ossp"`);
   }
 }
