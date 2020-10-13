@@ -48,12 +48,12 @@ class CreateAppointmentService {
       appointmentDate,
     );
 
-    if (this.checkIfAppointmentHourIsBeforeCurrentHour(appointmentDate)) {
-      throw new AppError('You cannot create an appointment on a pst date');
-    }
-
     if (findAppointmentInSameDate) {
       throw new AppError('This appointment is already booked');
+    }
+
+    if (this.checkIfAppointmentHourIsBeforeCurrentHour(appointmentDate)) {
+      throw new AppError('You cannot create an appointment on a past date');
     }
 
     if (user_id === provider_id) {
