@@ -11,7 +11,7 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 const usersRouter = Router();
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 
 // SoC: Separation of Concerns
 // Rota: It must concerns only in receives the request, calls another file and return a response

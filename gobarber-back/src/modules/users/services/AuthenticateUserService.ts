@@ -52,6 +52,11 @@ class AuthenticateUserService {
 
     const { secret, expiriesIn } = authConfig.jwt;
 
+    console.log('>>>secret=', secret);
+    if (!secret) {
+      throw new Error('It was not able to load JWT secret');
+    }
+
     const token = sign({}, secret, {
       subject: user.id,
       expiresIn: expiriesIn,
