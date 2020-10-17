@@ -29,7 +29,7 @@ class ListProvidersService {
         except_user_id: user_id,
       });
 
-      console.log('Database query was done!');
+      //console.log('Database query was done!');
       await this.cacheProvider.save(`providers-list:${user_id}`, users);
     }
 
