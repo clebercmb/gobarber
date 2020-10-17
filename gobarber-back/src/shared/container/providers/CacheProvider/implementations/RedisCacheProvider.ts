@@ -27,7 +27,9 @@ export default class RedisCashProvider implements ICacheProvider {
     return dataParsed;
   }
 
-  public async invalidate(key: string): Promise<void> {}
+  public async invalidate(key: string): Promise<void> {
+    await this.client.del(key);
+  }
 
   public async invalidatePrefix(prefix: string): Promise<void> {
     const keys = await this.client.keys(`${prefix}:*`);
@@ -38,6 +40,6 @@ export default class RedisCashProvider implements ICacheProvider {
       pipeline.del(key);
     });
 
-    await pipeline.exec()
+    await pipeline.exec();
   }
 }
