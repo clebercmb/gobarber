@@ -4,7 +4,6 @@ import {
   RouteProps as ReactDOMRouteProps,
   Redirect,
 } from 'react-router-dom';
-import { boolean } from 'yup';
 
 import { useAuth } from '../hooks/auth';
 
@@ -26,7 +25,7 @@ const Route: React.FC<RouteProps> = ({
 }) => {
   const { user } = useAuth();
 
-  console.log('>>>', user, isPrivate);
+  // console.log('>>>', user, isPrivate);
 
   return (
     <ReactDOMRoute

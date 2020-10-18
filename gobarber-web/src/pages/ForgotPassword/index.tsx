@@ -1,5 +1,5 @@
-import React, { useRef, useCallback } from 'react';
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import React, { useRef, useCallback, useState } from 'react';
+import { FiLogIn, FiMail } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -15,13 +15,15 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
+import api from '../../services/api';
 
 interface ForgotPasswordFormData {
   email: string;
 }
 
 const ForgotPassword: React.FC = () => {
-  console.log('>>> ForgotPassword');
+  const [loading, setLoading] = useState(false);
+
   const formRef = useRef<FormHandles>(null);
 
   const { addToast } = useToast();
@@ -29,6 +31,7 @@ const ForgotPassword: React.FC = () => {
   const handleSubmit = useCallback(
     async (data: ForgotPasswordFormData) => {
       try {
+        setLoading(true);
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
@@ -42,6 +45,14 @@ const ForgotPassword: React.FC = () => {
         });
 
         // Recovery password
+        await api.post('/password/forgot', { email: data.email });
+
+        addToast({
+          type: 'success',
+          title: 'Recovering e-mail has been sent',
+          description:
+            'It has beed sent an e-mail in order to recover the password. Check your e-mail box',
+        });
 
         // history.push('/dashboard');
       } catch (err) {
@@ -60,6 +71,8 @@ const ForgotPassword: React.FC = () => {
           description:
             'It happened an error when trying to recover the password, try again',
         });
+      } finally {
+        setLoading(false);
       }
     },
     [addToast],
@@ -79,7 +92,9 @@ const ForgotPassword: React.FC = () => {
               placeholder="E-mail"
             />
 
-            <Button type="submit">Recover</Button>
+            <Button loading={loading} type="submit">
+              Recover
+            </Button>
           </Form>
           <Link to="/">
             <FiLogIn />
