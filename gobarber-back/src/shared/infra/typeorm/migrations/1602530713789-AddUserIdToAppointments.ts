@@ -32,6 +32,6 @@ export default class AddUserIdToAppointments1602530713789
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('appointments', 'AppointmentUser');
-    await queryRunner.dropColumn('appointments', 'user_id')
+    await queryRunner.dropColumn('appointments', 'user_id');
   }
 }

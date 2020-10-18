@@ -1,7 +1,7 @@
 // Controllers must have at most 5 methods: index, show, create, update and delete
 // Controllers are responsible to receive requests, forward those requests to other files and give the response back
 
-import { parseISO } from 'date-fns';
+// import { parseISO } from 'date-fns';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
