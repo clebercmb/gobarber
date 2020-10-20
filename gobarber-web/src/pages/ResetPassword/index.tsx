@@ -52,7 +52,6 @@ const ResetPassword: React.FC = () => {
 
         if (!token) {
           throw new Error();
-          return;
         }
 
         await api.post('/password/reset', {
