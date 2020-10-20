@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { isToday, format } from 'date-fns';
+import enUS from 'date-fns/locale/en-US';
+
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { FiClock, FiPower } from 'react-icons/fi';
+
 import {
   Container,
   Header,
@@ -24,6 +29,15 @@ interface MonthAvailabilityItem {
   available: boolean;
 }
 
+interface AppointmentDTO {
+  id: string;
+  date: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
 
@@ -38,6 +52,8 @@ const Dashboard: React.FC = () => {
       setSelectedDate(day);
     }
   }, []);
+
+  const [appointments, setAppointments] = useState<AppointmentDTO[]>([]);
 
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
@@ -56,6 +72,21 @@ const Dashboard: React.FC = () => {
       });
   }, [currentMonth, user.id]);
 
+  useEffect(() => {
+    api
+      .get('/appointments/me', {
+        params: {
+          year: selectedDate.getFullYear(),
+          month: selectedDate.getMonth() + 1,
+          day: selectedDate.getDate(),
+        },
+      })
+      .then(response => {
+        setAppointments(response.data);
+        console.log('>>>>>Reponse.data=', response.data);
+      });
+  }, [selectedDate]);
+
   const disableDays = useMemo(() => {
     const dates = monthAvailability
       .filter(monthDay => monthDay.available === false)
@@ -66,6 +97,14 @@ const Dashboard: React.FC = () => {
       });
     return dates;
   }, [currentMonth, monthAvailability]);
+
+  const selectedDateAsText = useMemo(() => {
+    return format(selectedDate, 'MMMM do', { locale: enUS });
+  }, [selectedDate]);
+
+  const selectedWeeDay = useMemo(() => {
+    return format(selectedDate, 'cccc', { locale: enUS });
+  }, [selectedDate]);
 
   return (
     <Container>
@@ -88,9 +127,9 @@ const Dashboard: React.FC = () => {
         <Schedule>
           <h1>Appointments hours</h1>
           <p>
-            <span>Today</span>
-            <span>Day 06</span>
-            <span>Monday</span>
+            {isToday(selectedDate) && <span> Today</span>}
+            <span>{selectedDateAsText}</span>
+            <span>{selectedWeeDay}</span>
           </p>
 
           <NextAppointment>
