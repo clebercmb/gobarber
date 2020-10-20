@@ -1,6 +1,7 @@
 // Controllers must have at most 5 methods: index, show, create, update and delete
-// Controllers are responsible to receive requests, forward those request to other files and give back the response
+// Controllers are responsible to receive requests, forward those requests to other files and give the response back
 
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -15,8 +16,8 @@ export default class UserAvatarController {
       avatarFileName: request.file.filename,
     });
 
-    delete user.password;
+    // delete user.password;
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 }

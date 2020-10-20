@@ -26,8 +26,8 @@
 
 **Business Rules**
 
-- The use must not change its e-mail for one already used;
-- In order to update its password, the user must provider its former password;
+- User must not change its e-mail for one already used;
+- In order to update its password, the user must provider its old password;
 - In order to update its password, the user must confirm the new one;
 
 # Provider Dashboard

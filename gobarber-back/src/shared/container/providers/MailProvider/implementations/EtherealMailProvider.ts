@@ -1,5 +1,5 @@
 import nodemailer, { Transporter } from 'nodemailer';
-import { injectAll, inject, injectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 
 import IMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/IMailTemplateProvider';
 
@@ -56,7 +56,7 @@ export default class EtherealMailProvider implements IMailProvider {
     });
 
     console.log('Message sent: %s', message.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
+    // // Preview only available when sending through an Ethereal account
+    // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
   }
 }

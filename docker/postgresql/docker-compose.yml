@@ -1,5 +1,6 @@
 gostack_postgres:
   image: postgres
+  container_name: gostack_postgres
   ports:
     - "5432:5432"
   environment:
