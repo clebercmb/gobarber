@@ -19,7 +19,9 @@ import { useAuth } from '../../hooks/auth';
 interface ProfileFormData {
   name: string;
   email: string;
+  old_password: string;
   password: string;
+  password_confirmation: string;
 }
 
 const Profile: React.FC = () => {
@@ -39,21 +41,59 @@ const Profile: React.FC = () => {
           email: Yup.string()
             .required('E-mail required')
             .email('Type a valid e-mail'),
-          password: Yup.string().min(6, 'Minimal 6 digits'),
+          old_password: Yup.string(),
+          password: Yup.string().when('old_password', {
+            is: val => !!val.length,
+            then: Yup.string().required('Required field'),
+            otherwise: Yup.string(),
+          }),
+          password_confirmation: Yup.string()
+            .when('old_password', {
+              is: val => !!val.length,
+              then: Yup.string().required('Required field'),
+              otherwise: Yup.string(),
+            })
+            .oneOf(
+              [Yup.ref('password'), null],
+              'Password confirmation must match',
+            ),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
+        const {
+          name,
+          email,
+          old_password,
+          password,
+          password_confirmation,
+        } = data;
+
+        const formData = {
+          name,
+          email,
+          ...(old_password
+            ? {
+                old_password,
+                password,
+                password_confirmation,
+              }
+            : {}),
+        };
+
+        const response = await api.put('/profile', formData);
+
+        updateUser(response.data);
+
+        history.push('/dashboard');
+
         addToast({
           type: 'success',
-          title: 'Register done!',
-          description: 'You already can login into GoBarber!',
+          title: 'Profile updated',
+          description: 'Your profile information has been updated!',
         });
-
-        history.push('/');
       } catch (err) {
         console.log(err);
 
@@ -66,8 +106,9 @@ const Profile: React.FC = () => {
         // it triggers a toast
         addToast({
           type: 'error',
-          title: 'Register Error',
-          description: 'It happened an error to register, try again',
+          title: 'Update Error',
+          description:
+            'It happened an error when you tried to update your profile, try again',
         });
       }
     },
@@ -90,7 +131,7 @@ const Profile: React.FC = () => {
         });
       }
     },
-    [addToast],
+    [addToast, updateUser],
   );
 
   return (
