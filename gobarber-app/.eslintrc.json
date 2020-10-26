@@ -58,7 +58,8 @@
         ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
-    ]
+    ],
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {
