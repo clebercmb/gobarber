@@ -70,7 +70,7 @@ export const ProviderContainer = styled(RectButton)`
 export const ProviderAvatar = styled.Image`
   width: 72px;
 
-  height: 72;
+  height: 72px;
 
   border-radius: 36px;
 `;
