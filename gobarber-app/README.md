@@ -5,3 +5,8 @@
 yarn android
 adb reverse tcp:3333 tcp:3333
 yarn start
+
+# ios
+
+cd ios
+pod install
