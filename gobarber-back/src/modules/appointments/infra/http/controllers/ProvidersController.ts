@@ -1,6 +1,7 @@
 // Controllers must have at most 5 methods: index (List), show, create, update and delete
 // Controllers are responsible to receive requests, forward those requests to other files and give the response back
 
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -13,6 +14,6 @@ export default class ProvidersController {
     const listProviders = container.resolve(ListProvidersService);
     const providers = await listProviders.execute({ user_id });
 
-    return response.json(providers);
+    return response.json(classToClass(providers));
   }
 }
