@@ -37,7 +37,6 @@ const SignUp: React.FC = () => {
 
   const handleSignUp = useCallback(
     async (data: SignUpFormData) => {
-      console.log(data);
       try {
         formRef.current?.setErrors({});
 
