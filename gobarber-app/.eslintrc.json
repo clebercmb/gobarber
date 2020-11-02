@@ -11,8 +11,7 @@
   ],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly",
-    "__DEV__": "readonly"
+    "SharedArrayBuffer": "readonly"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -30,10 +29,26 @@
     "import-helpers"
   ],
   "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "no-unused-expressions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/prefer-default-export": "off",
+    "import/no-duplicates": "off",
+    "@typescript-eslint/camelcase": "off",
+    "camelcase": "off",
+    "@typescript-eslint/ban-types": "off",
+    "react/require-default-props": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -42,9 +57,6 @@
         "tsx": "never"
       }
     ],
-    "prettier/prettier": "error",
-    "react/jsx-props-no-spreading": "off",
-    "no-unused-expressions": "off",
     "import-helpers/order-imports": [
       "warn",
       {
@@ -58,8 +70,7 @@
         ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
-    ],
-    "camelcase": "off"
+    ]
   },
   "settings": {
     "import/resolver": {
