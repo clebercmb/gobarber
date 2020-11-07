@@ -126,6 +126,7 @@ const Profile: React.FC = () => {
   );
 
   const handleUpdateAvatar = useCallback(() => {
+    // console.log('>>>Teste');
     ImagePicker.showImagePicker(
       {
         title: 'Choose an avatar',
@@ -145,13 +146,14 @@ const Profile: React.FC = () => {
         // const source = { uri: response.uri };
 
         const data = new FormData();
+
         data.append('avatar', {
           type: 'image/jpeg',
           name: `${user.id}.jpg`,
           uri: response.uri,
         });
 
-        api.patch('user/avatar', data).then(apiResponse => {
+        api.patch('users/avatar', data).then(apiResponse => {
           updateUser(apiResponse.data);
         });
 
