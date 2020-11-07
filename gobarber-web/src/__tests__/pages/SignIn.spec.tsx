@@ -1,5 +1,7 @@
-import { render } from '@testing-library/react';
 import React from 'react';
+
+import { render, fireEvent } from '@testing-library/react';
+
 import SignIn from '../../pages/SignIn';
 
 jest.mock('react-router-dom', () => {
@@ -12,7 +14,9 @@ jest.mock('react-router-dom', () => {
 
 describe('SignIn Page', () => {
   it('should be able to sign in', () => {
-    const { debug } = render(<SignIn />);
-    debug();
+    const { getByPlaceholderText } = render(<SignIn />);
+
+    const emailField = getByPlaceholderText('E-mail');
+    const passwordField = getByPlaceholderText('Password');
   });
 });
