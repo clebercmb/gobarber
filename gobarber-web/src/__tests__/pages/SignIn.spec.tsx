@@ -53,6 +53,9 @@ describe('SignIn Page', () => {
 
     fireEvent.click(buttonElement);
 
+    // Always a change is done in a state, you can not count on that this change happens instantaneously
+    // So when you have something in your test that will take a little long time, you need to use await
+
     await waitFor(() => {
       expect(mockedHistoryPush).toHaveBeenCalledWith('/dashboard');
     });
@@ -69,6 +72,9 @@ describe('SignIn Page', () => {
     fireEvent.change(passwordField, { target: { value: '123456' } });
 
     fireEvent.click(buttonElement);
+
+    // Always a change is done in a state, you can not count on that this change happens instantaneously
+    // So when you have something in your test that will take a little long time, you need to use await
 
     await waitFor(() => {
       expect(mockedHistoryPush).not.toHaveBeenCalled();
@@ -90,6 +96,9 @@ describe('SignIn Page', () => {
     fireEvent.change(passwordField, { target: { value: '123456' } });
 
     fireEvent.click(buttonElement);
+
+    // Always a change is done in a state, you can not count on that this change happens instantaneously
+    // So when you have something in your test that will take a little long time, you need to use await
 
     await waitFor(() => {
       expect(mockedAddToast).toHaveBeenCalledWith(
