@@ -13,14 +13,18 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: 14.x
+          working-directory: gobarber-back
+        
 
       # Install NPM/Yarn dependencies
       - name: Install dependencies
         run:  yarn
+        working-directory: gobarber-back
 
       # Run the build
       - name: Run build
         run:  yarn build
+        working-directory: gobarber-back
       
       - name: Copy dist folder to Digital Ocean
         uses: appleboy/scp-action@master
