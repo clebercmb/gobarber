@@ -49,6 +49,19 @@ jobs:
           source: "gobarber-back,!node_modules,!gobarber-back/node_modules"
           target: "~/app/gobarber"
 
+
+      - name: Run productions scripts
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: | 
+            cd ~/app/gobarber/gobarber-back
+            yarn
+            ./node_modules/.bin/typeorm migration:run
+            pm2 restart gobarber-api
     
     # Run "yarn" at Digital Ocean
     # Run TypeORM migrations
