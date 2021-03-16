@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "gobarber-back/dist"
+          source: "gobarber-back"
           target: "test"
 
     # Copy dist folder to Digital Ocean
