@@ -37,7 +37,8 @@ jobs:
       # Run the build
       - name: Run build
         run:  yarn build
-      
+
+      # Copy dist folder to Digital Ocean
       - name: Copy dist folder to Digital Ocean
         uses: appleboy/scp-action@master
         with:
@@ -45,12 +46,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "gobarber-back"
+          source: "gobarber-back,!node_modules,!gobarber-back/node_modules"
           target: "~/app/gobarber"
 
-    # Copy dist folder to Digital Ocean
     
-    # Replace current code at dist folder for the new onw
     # Run "yarn" at Digital Ocean
     # Run TypeORM migrations
     # Restart Node.js at the server
